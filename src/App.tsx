@@ -7,6 +7,7 @@ import {
 import TMAEmulator from "./components/TMAEmulator";
 import StrategyHub from "./components/StrategyHub";
 import ShowcaseDevice from "./components/ShowcaseDevice";
+import MatchaWordmark from "./components/MatchaWordmark";
 import OnboardingModal from "./components/OnboardingModal";
 import { LOCALES } from "./locales";
 
@@ -53,26 +54,9 @@ export default function App() {
   return (
     <div id="landing-root-container" className="min-h-screen bg-[#F0FAF4] text-brand-primary font-sans relative overflow-hidden pb-20 selection:bg-brand-green selection:text-brand-deep-green">
       
-      {/* Background Animated Subtle Blob Orbs for Visual Rhythm */}
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.15, 1],
-          x: [0, 40, 0],
-          y: [0, -30, 0]
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[-10%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-brand-green/15 blur-[120px] pointer-events-none"
-      />
-      
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.1, 1],
-          x: [0, -50, 0],
-          y: [0, 40, 0]
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[10%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-brand-dark-green/10 blur-[130px] pointer-events-none"
-      />
+      {/* Background accents (static for smoother performance) */}
+      <div className="absolute top-[-10%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-brand-green/10 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[10%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-brand-dark-green/10 blur-[130px] pointer-events-none" />
 
       {/* Elegant grid overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
@@ -159,6 +143,13 @@ export default function App() {
 
       {/* Main Container Workspace */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-16 space-y-20 relative z-10 text-center">
+
+        <section className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-[#061743] py-8 sm:py-10">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
+            <MatchaWordmark />
+            <ShowcaseDevice lang={lang} />
+          </div>
+        </section>
         
         {/* HERO TITLE BLOCK */}
         <section className="max-w-4xl mx-auto space-y-6 pt-6">
@@ -223,23 +214,6 @@ export default function App() {
               ))}
             </div>
           </div>
-        </section>
-
-        {/* SECTION 1: 3D UNRAVEL LAPTOP DEVICE SHOWCASE */}
-        <section id="showcase-section" className="pt-8 scroll-mt-24">
-          <div className="max-w-3xl mx-auto space-y-3 mb-8">
-            <span className="text-[10px] font-mono font-bold text-brand-dark-green bg-brand-mint-light border border-brand-green/35 px-3 py-1 rounded-full uppercase tracking-widest inline-block">
-              {t.vibePitchTag}
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-display font-black text-slate-900">
-              {t.vibePitchTitle}
-            </h2>
-            <p className="text-xs text-slate-500 max-w-xl mx-auto font-medium">
-              {t.vibePitchSub}
-            </p>
-          </div>
-
-          <ShowcaseDevice lang={lang} />
         </section>
 
         {/* SECTION 2: INTERACTIVE BOT DISCOVERY EMULATOR */}
