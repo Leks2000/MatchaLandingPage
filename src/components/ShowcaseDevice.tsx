@@ -6,35 +6,32 @@ interface ShowcaseDeviceProps {
 }
 
 export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const cta =
+    lang === "RU"
+      ? "Запустите Matcha Bot в Telegram"
+      : "Launch Matcha Bot in Telegram";
+  const REAL_QR = "https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=https%3A%2F%2Ft.me%2Fgetmatchabot";
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "center center"],
-  });
-
-  const rotateXMotion = useTransform(scrollYProgress, [0, 1], [14, 0]);
-  const rotateYMotion = useTransform(scrollYProgress, [0, 1], [-7, 0]);
-  const translateYMotion = useTransform(scrollYProgress, [0, 1], [36, 0]);
-  const scaleMotion = useTransform(scrollYProgress, [0, 1], [0.96, 1.02]);
-  const opacityMotion = useTransform(scrollYProgress, [0, 0.8], [0.62, 1]);
+  const ctaSub =
+    lang === "RU"
+      ? "Синхронизируйте ваши интересы по коду и матче с лучшими создателями в IT."
+      : "Sync your coding and matcha interests with top IT creators.";
 
   return (
     <section className="relative w-full max-w-5xl mx-auto pt-2 pb-8 px-4 md:px-8">
-      <div
-        ref={containerRef}
-        className="w-full relative -mt-4 sm:-mt-6 flex items-center justify-center"
-        style={{ perspective: "1200px" }}
-      >
+      <div className="w-full relative -mt-4 sm:-mt-6 flex items-center justify-center" style={{ perspective: "1400px" }}>
         <motion.div
           style={{
-            rotateX: rotateXMotion,
-            rotateY: rotateYMotion,
-            y: translateYMotion,
-            scale: scaleMotion,
-            opacity: opacityMotion,
+            rotateX,
+            rotateY,
+            y: translateY,
+            scale,
+            opacity,
             transformStyle: "preserve-3d",
           }}
+          initial={{ rotateX: 10, rotateY: -9, y: 10 }}
+          animate={{ rotateX: [10, 8, 10], rotateY: [-9, -6, -9], y: [10, 0, 10] }}
+          transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
           className="w-full rounded-[30px] border-4 border-brand-mint-card/90 bg-[#F7FFFA] p-3 md:p-5 shadow-[0_35px_90px_rgba(8,44,22,0.34)]"
         >
           <div className="overflow-hidden rounded-2xl bg-[#0E1E14]">
@@ -53,6 +50,22 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
             </video>
           </div>
         </motion.div>
+      </div>
+
+      <div className="mt-5 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-between">
+        <div className="text-center sm:text-left">
+          <p className="text-lg sm:text-xl font-black text-white">{cta}</p>
+          <p className="mt-1.5 text-xs sm:text-sm font-medium text-[#DAFBE8]">{ctaSub}</p>
+        </div>
+
+        <a
+          href="https://t.me/getmatchabot"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 rounded-2xl bg-brand-green px-5 py-3 text-white font-black text-sm shadow-[0_12px_24px_rgba(34,197,94,0.3)] hover:scale-[1.02] transition-transform"
+        >
+          {lang === "RU" ? "Запустить бота" : "Launch bot"}
+        </a>
       </div>
     </section>
   );

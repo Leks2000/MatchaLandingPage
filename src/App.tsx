@@ -69,24 +69,24 @@ export default function App() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
 
       {/* Top actions */}
-      <header className="fixed top-4 right-4 z-50 flex items-center gap-3 bg-[#D5E2DC]/90 backdrop-blur-sm px-2.5 py-2 rounded-[18px] shadow-sm">
+      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-[#D5E2DC]/85 backdrop-blur-sm px-3 py-2 rounded-[20px] shadow-sm">
         <button 
           onClick={() => setLang(lang === "RU" ? "EN" : "RU")}
-          className="h-10 min-w-[78px] px-3.5 inline-flex items-center justify-center gap-1.5 bg-[#ECF5F0] border border-[#C6D5CD] rounded-2xl text-[24px] sm:text-sm font-black text-[#2D6650] shadow-[0_2px_8px_rgba(11,30,21,0.12)]"
+          className="h-11 min-w-[86px] px-4 inline-flex items-center justify-center gap-2 bg-[#ECF5F0] border border-[#C6D5CD] rounded-2xl text-base font-black text-[#2D6650] shadow-[0_2px_8px_rgba(11,30,21,0.12)]"
         >
           <Globe className="w-4 h-4" /> {lang}
         </button>
 
         <button 
           onClick={() => setIsOnboardingOpen(true)}
-          className="h-10 min-w-[190px] px-5 inline-flex items-center justify-center gap-2 bg-brand-green hover:bg-[#16A34A] text-white font-black text-[24px] sm:text-sm uppercase rounded-2xl transition-all shadow-[0_8px_16px_rgba(9,87,42,0.25)]"
+          className="h-11 min-w-[220px] px-7 inline-flex items-center justify-center gap-2 bg-brand-green hover:bg-[#16A34A] text-white font-black text-[30px] sm:text-base uppercase rounded-2xl transition-all shadow-[0_8px_16px_rgba(9,87,42,0.25)]"
         >
           {lang === "RU" ? "Запустить бота" : "Launch bot"} <Send className="w-4 h-4" />
         </button>
       </header>
 
       {/* Main Container Workspace */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:pt-28 space-y-20 relative z-10 text-center">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 md:pt-32 space-y-20 relative z-10 text-center">
 
         <section id="showcase-section" className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-gradient-to-b from-[#0A1F14] via-[#0D2B1B] to-[#123322] py-8 sm:py-10">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
