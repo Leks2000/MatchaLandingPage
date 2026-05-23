@@ -88,7 +88,7 @@ export default function App() {
       {/* Main Container Workspace */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 md:pt-32 space-y-20 relative z-10 text-center">
 
-        <section id="showcase-section" className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-[#061743] py-8 sm:py-10">
+        <section id="showcase-section" className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-gradient-to-b from-[#0A1F14] via-[#0D2B1B] to-[#123322] py-8 sm:py-10">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
             <MatchaWordmark />
             <ShowcaseDevice lang={lang} />

@@ -30,7 +30,7 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
         >
           <div className="overflow-hidden rounded-2xl bg-black">
             <video
-              className="h-full w-full aspect-[16/9] object-cover"
+              className="h-full w-full aspect-[16/9] object-cover object-left-top scale-[1.06]"
               autoPlay
               muted
               loop
