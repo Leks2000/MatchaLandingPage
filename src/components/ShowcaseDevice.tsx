@@ -4,9 +4,6 @@ interface ShowcaseDeviceProps {
   lang: "RU" | "EN";
 }
 
-const REAL_QR =
-  "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https%3A%2F%2Ft.me%2Fgetmatchabot";
-
 export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
   const cta =
     lang === "RU"
@@ -26,6 +23,8 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
           style={{
             transformStyle: "preserve-3d",
           }}
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
           className="w-full rounded-[30px] border-4 border-[#DCFCE7] bg-white p-3 md:p-5 shadow-[0_24px_80px_rgba(0,0,0,0.2)]"
         >
           <div className="overflow-hidden rounded-2xl bg-black">
