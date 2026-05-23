@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "motion/react";
-import { Video, Sparkles, Volume2, ShieldCheck, Heart, Play, Pause } from "lucide-react";
+import React from "react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import { Home, UserRound, MessageSquareText } from "lucide-react";
 
 interface ShowcaseDeviceProps {
   lang: "RU" | "EN";
@@ -9,8 +9,7 @@ interface ShowcaseDeviceProps {
 export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentCaptionIdx, setCurrentCaptionIdx] = useState(0);
-  const [reactions, setReactions] = useState<{ id: number; emoji: string; x: number; y: number }[]>([]);
-  
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   // We track the scroll position of the parent container relative to the viewport
@@ -21,63 +20,20 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
 
   // TRANSFORMS matching exactly the inspect screenshots:
   // Starts with rotateX(24deg) and scale(1.08) when entering, straightens up to rotateX(0deg) / transform: none on scroll as it approaches center
-  const scrollRotateX = useTransform(scrollYProgress, [0.0, 0.55], [24, 0]);
-  const scrollScale = useTransform(scrollYProgress, [0.0, 0.55], [1.08, 1]);
-  const scrollTranslateZ = useTransform(scrollYProgress, [0.0, 0.55], [-45, 0]);
+  const scrollRotateX = useTransform(scrollYProgress, [0.0, 0.55], [10, 0]);
+  const scrollScale = useTransform(scrollYProgress, [0.0, 0.55], [1.02, 1]);
 
-  // Use crisp yet responsive spring dynamics for fluid scroll updates
-  const springRotateX = useSpring(scrollRotateX, { stiffness: 80, damping: 22 });
-  const springScale = useSpring(scrollScale, { stiffness: 80, damping: 22 });
-  const springTranslateZ = useSpring(scrollTranslateZ, { stiffness: 80, damping: 22 });
+  const springRotateX = useSpring(scrollRotateX, { stiffness: 60, damping: 20 });
+  const springScale = useSpring(scrollScale, { stiffness: 60, damping: 20 });
 
-  const isRu = lang === "RU";
+const REAL_QR = "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https%3A%2F%2Ft.me%2Fgetmatchabot";
 
-  const CAPTIONS = {
-    RU: [
-      "«Привет! Я Артем, пилю распределенные базы данных на Rust... 🦀»",
-      "...и обожаю чай матча! Ищу сильного UX/UI дизайнера в кофаундеры 🤝",
-      "«Свайпни мою голосовую волну, если готов задизайнить будущее вместе!» ✨",
-      "«Запускай Matcha Bot и давай настроимся на одну частоту кода!» 💚"
-    ],
-    EN: [
-      "\"Hey! I'm Artem, building ultra-fast distributed storage engines in Rust... 🦀\"",
-      "...and absolutely addicted to Matcha! Looking for a seasoned UX/UI cofounder 🤝",
-      "\"Swipe my vocal frequency if you are down to construct the future layout!\" ✨",
-      "\"Launch Matcha Bot right now and let's lock onto the same coding frequency!\" 💚"
-    ]
-  };
+export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
-  // Subtitle cycle
-  useEffect(() => {
-    if (!isPlaying) return;
-    const interval = setInterval(() => {
-      setCurrentCaptionIdx((prev) => (prev + 1) % CAPTIONS[lang].length);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, [isPlaying, lang]);
 
-  // Particle feedback bursts
-  useEffect(() => {
-    if (!isPlaying) return;
-    const interval = setInterval(() => {
-      const symbols = ["🍵", "🔥", "🤝", "💻", "🚀", "💚"];
-      const s = symbols[Math.floor(Math.random() * symbols.length)];
-      setReactions((prev) => [
-        ...prev,
-        {
-          id: Date.now() + Math.random(),
-          emoji: s,
-          x: Math.random() * 60 + 20,
-          y: Math.random() * 30 + 40
-        }
-      ]);
-      setTimeout(() => {
-        setReactions((prev) => prev.slice(1));
-      }, 2500);
-    }, 1800);
-    return () => clearInterval(interval);
-  }, [isPlaying]);
-
+export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
   return (
     <div 
       ref={containerRef}
@@ -97,7 +53,7 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
           style={{
             rotateX: springRotateX,
             scale: springScale,
-            translateZ: springTranslateZ,
+
             transformStyle: "preserve-3d",
             boxShadow: "rgba(0, 0, 0, 0.15) 0px 0px, rgba(0, 0, 0, 0.14) 0px 9px 20px, rgba(0, 0, 0, 0.12) 0px 37px 37px, rgba(0, 0, 0, 0.08) 0px 84px 50px, rgba(0, 0, 0, 0.02) 0px 149px 60px, rgba(0, 0, 0, 0.01) 0px 233px 65px"
           }}
@@ -171,24 +127,6 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
                   />
                 ))}
               </div>
-
-              {/* Animated feedback reactions bursting up */}
-              <AnimatePresence>
-                {reactions.map((r) => (
-                  <motion.span
-                    key={r.id}
-                    initial={{ opacity: 0, scale: 0.5, y: 15 }}
-                    animate={{ opacity: 1, scale: 1.3, y: -70 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 2.2, ease: "easeOut" }}
-                    style={{ left: `${r.x}%`, top: `${r.y}%` }}
-                    className="absolute text-xl z-20 pointer-events-none select-none filter drop-shadow-xs"
-                  >
-                    {r.emoji}
-                  </motion.span>
-                ))}
-              </AnimatePresence>
-
             </div>
 
             {/* Captions & Playback tracking bar */}
@@ -239,47 +177,43 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
 
       </div>
 
-      {/* THREE EXPLANATION CARD TRUST MODULES BELOW VIDEO (Mint Light Theme) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mt-12 bg-white border border-[#DCFCE7] p-6 rounded-2xl text-left shadow-xs">
-        
-        <div className="space-y-1.5 md:border-r border-[#E2E8F0] last:border-0 md:pr-4">
-          <div className="flex items-center gap-1.5 text-[#16A34A] font-mono text-[10px] uppercase font-bold tracking-widest">
-            <Volume2 className="w-4 h-4 text-[#22C55E]" /> VOICE ALIGNMENT
-          </div>
-          <p className="text-[#0F172A] text-sm font-bold leading-tight font-display">
-            {isRu ? "Свайпайте аудио-питчи" : "Swipe Audio Pitches"}
-          </p>
-          <p className="text-[#64748B] text-xs leading-relaxed font-semibold">
-            {isRu ? "Голос передает энергетику и характер лучше любого текстового резюме." : "Voice signatures tell more about technical vibe than static words."}
-          </p>
+      <motion.div
+        style={{ rotateX, scale, transformStyle: "preserve-3d" }}
+        className="mx-auto w-full max-w-5xl rounded-[34px] border-4 border-[#6b6b6b] bg-[#202020] p-2 sm:p-3 shadow-[0_24px_80px_rgba(0,0,0,0.5)]"
+      >
+        <div className="overflow-hidden rounded-[24px] bg-black">
+          <video
+            className="h-full w-full aspect-[16/9] object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            controls={false}
+            poster="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop"
+          >
+            <source src={DEMO_VIDEO} type="video/mp4" />
+          </video>
         </div>
+      </motion.div>
 
-        <div className="space-y-1.5 md:border-r border-[#E2E8F0] last:border-0 md:px-4">
-          <div className="flex items-center gap-1.5 text-[#16A34A] font-mono text-[10px] uppercase font-bold tracking-widest">
-            <Sparkles className="w-4 h-4 text-[#22C55E]" /> AI FREQUENCY MATRIX
-          </div>
-          <p className="text-[#0F172A] text-sm font-bold leading-tight font-display">
-            {isRu ? "Мэтчинг по интересам" : "Interests Matching Index"}
-          </p>
-          <p className="text-[#64748B] text-xs leading-relaxed font-semibold">
-            {isRu ? "Модели Gemini вычисляют общие теги настроения, стек и IT-роли в реальном времени." : "Gemini parses tech tags, product roles, and interests instantly."}
-          </p>
-        </div>
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
+        <p className="text-center md:text-left text-xs font-semibold text-white/70">
+          {lang === "RU"
+            ? "Демо-видео заглушка (автоплей, muted, loop) — легко заменить на ваш ролик."
+            : "Placeholder demo video (autoplay, muted, loop) — easy to replace with your final clip."}
+        </p>
 
-        <div className="space-y-1.5 last:border-0 md:pl-4">
-          <div className="flex items-center gap-1.5 text-[#16A34A] font-mono text-[10px] uppercase font-bold tracking-widest">
-            <ShieldCheck className="w-4 h-4 text-[#22C55E]" /> TG PRIVATE CLOUD
-          </div>
-          <p className="text-[#0F172A] text-sm font-bold leading-tight font-display">
-            {isRu ? "Полная анонимность" : "Encrypted Privacy"}
-          </p>
-          <p className="text-[#64748B] text-xs leading-relaxed font-semibold">
-            {isRu ? "Ваш голос шифруется и никогда не выйдет за защищенные рамки Telegram." : "Complete user control: audio traces live natively inside safe structures."}
-          </p>
-        </div>
-        
+        <a
+          href="https://t.me/getmatchabot"
+          target="_blank"
+          rel="noreferrer"
+          className="justify-self-center md:justify-self-end w-[220px] rounded-2xl bg-white p-3 shadow-xl hover:scale-[1.02] transition-transform"
+        >
+          <img src={REAL_QR} alt="QR code to @GETMATCHABOT" className="w-full h-auto rounded-xl" loading="lazy" />
+          <p className="pt-2 text-center text-[#5b7ee8] text-xl font-black tracking-wide">@GETMATCHABOT</p>
+        </a>
       </div>
-
-    </div>
+    </section>
   );
 }
