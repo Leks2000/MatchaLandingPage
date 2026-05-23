@@ -5,6 +5,17 @@ interface ShowcaseDeviceProps {
 }
 
 export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
+  const cta =
+    lang === "RU"
+      ? "Запустите Matcha Bot в Telegram"
+      : "Launch Matcha Bot in Telegram";
+  const REAL_QR = "https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=https%3A%2F%2Ft.me%2Fgetmatchabot";
+
+  const ctaSub =
+    lang === "RU"
+      ? "Синхронизируйте ваши интересы по коду и матче с лучшими создателями в IT."
+      : "Sync your coding and matcha interests with top IT creators.";
+
   return (
     <section className="relative w-full max-w-5xl mx-auto pt-2 pb-8 px-4 md:px-8">
       <div className="w-full relative -mt-4 sm:-mt-6 flex items-center justify-center" style={{ perspective: "1400px" }}>
@@ -34,6 +45,21 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
         </motion.div>
       </div>
 
+      <div className="mt-5 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-between">
+        <div className="text-center sm:text-left">
+          <p className="text-lg sm:text-xl font-black text-white">{cta}</p>
+          <p className="mt-1.5 text-xs sm:text-sm font-medium text-[#DAFBE8]">{ctaSub}</p>
+        </div>
+
+        <a
+          href="https://t.me/getmatchabot"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 rounded-2xl bg-brand-green px-5 py-3 text-white font-black text-sm shadow-[0_12px_24px_rgba(34,197,94,0.3)] hover:scale-[1.02] transition-transform"
+        >
+          {lang === "RU" ? "Запустить бота" : "Launch bot"}
+        </a>
+      </div>
     </section>
   );
 }
