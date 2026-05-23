@@ -9,6 +9,8 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
     lang === "RU"
       ? "Запустите Matcha Bot в Telegram"
       : "Launch Matcha Bot in Telegram";
+  const REAL_QR = "https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=https%3A%2F%2Ft.me%2Fgetmatchabot";
+
   const ctaSub =
     lang === "RU"
       ? "Синхронизируйте ваши интересы по коду и матче с лучшими создателями в IT."
@@ -22,7 +24,6 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
         <motion.div
           style={{
             transformStyle: "preserve-3d",
-            borderColor,
           }}
           animate={{ y: [0, -6, 0] }}
           transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
