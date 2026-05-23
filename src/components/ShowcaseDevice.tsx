@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 
 interface ShowcaseDeviceProps {
   lang: "RU" | "EN";
@@ -21,6 +22,11 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
       <div className="w-full relative -mt-4 sm:-mt-6 flex items-center justify-center" style={{ perspective: "1400px" }}>
         <motion.div
           style={{
+            rotateX,
+            rotateY,
+            y: translateY,
+            scale,
+            opacity,
             transformStyle: "preserve-3d",
           }}
           initial={{ rotateX: 10, rotateY: -9, y: 10 }}
@@ -28,7 +34,7 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
           transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
           className="w-full rounded-[30px] border-4 border-brand-mint-card/90 bg-[#F7FFFA] p-3 md:p-5 shadow-[0_35px_90px_rgba(8,44,22,0.34)]"
         >
-          <div className="overflow-hidden rounded-2xl bg-black">
+          <div className="overflow-hidden rounded-2xl bg-[#0E1E14]">
             <video
               className="h-full w-full aspect-[16/9] object-cover object-left-top scale-[1.06]"
               autoPlay
@@ -38,6 +44,7 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
               preload="metadata"
               controls={false}
               poster="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop"
+              aria-label={lang === "RU" ? "Демонстрационное видео Matcha Bot" : "Matcha Bot showcase video"}
             >
               <source src="https://cdn.coverr.co/videos/coverr-office-teamwork-1579/1080p.mp4" type="video/mp4" />
             </video>
