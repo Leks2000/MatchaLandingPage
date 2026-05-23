@@ -60,7 +60,7 @@ export default function App() {
   }, []);
 
   return (
-    <div id="landing-root-container" className="min-h-screen bg-[#F0FDF4] text-brand-primary font-sans relative overflow-hidden pb-20 selection:bg-brand-green selection:text-brand-deep-green">
+    <div id="landing-root-container" className="min-h-screen bg-[#FFFFFF] text-brand-primary font-sans relative overflow-hidden pb-20 selection:bg-brand-green selection:text-brand-deep-green">
       
       {/* Background accents (static for smoother performance) */}
       <div className="absolute top-[-10%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-brand-green/10 blur-[120px] pointer-events-none" />
@@ -70,23 +70,20 @@ export default function App() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
 
       {/* Top actions */}
-      <header className="fixed top-4 right-4 z-50">
-        <div className="flex items-center gap-2">
+      <header className="fixed top-4 right-4 z-50 flex items-center gap-3">
         <button 
           onClick={() => setLang(lang === "RU" ? "EN" : "RU")}
-          className="h-11 px-4 bg-[#EAF7EE] border border-[#CFE7D6] rounded-2xl text-sm font-mono font-bold text-[#14532D] shadow-[0_4px_14px_rgba(15,23,42,0.12)] inline-flex items-center gap-2"
+          className="px-4 py-2 bg-brand-white border border-brand-border rounded-xl text-sm font-mono font-bold text-brand-deep-green shadow-sm hover:shadow"
         >
-          <Globe className="w-4 h-4 text-brand-green" />
           {lang}
         </button>
 
         <button 
           onClick={() => setIsOnboardingOpen(true)}
-          className="h-12 bg-brand-green hover:bg-[#16A34A] text-white font-extrabold text-sm px-6 rounded-2xl transition-all shadow-[0_8px_24px_rgba(34,197,94,0.45)] inline-flex items-center gap-2"
+          className="bg-brand-green hover:bg-[#16A34A] text-white font-extrabold text-sm px-5 py-3 rounded-xl transition-all shadow-md hover:shadow-lg"
         >
-          {t.btnLaunch} <Send className="w-4 h-4" />
+          {t.btnLaunch}
         </button>
-        </div>
       </header>
 
       {/* Main Container Workspace */}
