@@ -9,8 +9,7 @@ interface ShowcaseDeviceProps {
 export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentCaptionIdx, setCurrentCaptionIdx] = useState(0);
-  const [reactions, setReactions] = useState<{ id: number; emoji: string; x: number; y: number }[]>([]);
-  
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   // We track the scroll position of the parent container relative to the viewport
@@ -21,14 +20,11 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
 
   // TRANSFORMS matching exactly the inspect screenshots:
   // Starts with rotateX(24deg) and scale(1.08) when entering, straightens up to rotateX(0deg) / transform: none on scroll as it approaches center
-  const scrollRotateX = useTransform(scrollYProgress, [0.0, 0.55], [24, 0]);
-  const scrollScale = useTransform(scrollYProgress, [0.0, 0.55], [1.08, 1]);
-  const scrollTranslateZ = useTransform(scrollYProgress, [0.0, 0.55], [-45, 0]);
+  const scrollRotateX = useTransform(scrollYProgress, [0.0, 0.55], [10, 0]);
+  const scrollScale = useTransform(scrollYProgress, [0.0, 0.55], [1.02, 1]);
 
-  // Use crisp yet responsive spring dynamics for fluid scroll updates
-  const springRotateX = useSpring(scrollRotateX, { stiffness: 80, damping: 22 });
-  const springScale = useSpring(scrollScale, { stiffness: 80, damping: 22 });
-  const springTranslateZ = useSpring(scrollTranslateZ, { stiffness: 80, damping: 22 });
+  const springRotateX = useSpring(scrollRotateX, { stiffness: 60, damping: 20 });
+  const springScale = useSpring(scrollScale, { stiffness: 60, damping: 20 });
 
   const isRu = lang === "RU";
 
@@ -56,27 +52,6 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
     return () => clearInterval(interval);
   }, [isPlaying, lang]);
 
-  // Particle feedback bursts
-  useEffect(() => {
-    if (!isPlaying) return;
-    const interval = setInterval(() => {
-      const symbols = ["🍵", "🔥", "🤝", "💻", "🚀", "💚"];
-      const s = symbols[Math.floor(Math.random() * symbols.length)];
-      setReactions((prev) => [
-        ...prev,
-        {
-          id: Date.now() + Math.random(),
-          emoji: s,
-          x: Math.random() * 60 + 20,
-          y: Math.random() * 30 + 40
-        }
-      ]);
-      setTimeout(() => {
-        setReactions((prev) => prev.slice(1));
-      }, 2500);
-    }, 1800);
-    return () => clearInterval(interval);
-  }, [isPlaying]);
 
   return (
     <div 
@@ -97,7 +72,7 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
           style={{
             rotateX: springRotateX,
             scale: springScale,
-            translateZ: springTranslateZ,
+
             transformStyle: "preserve-3d",
             boxShadow: "rgba(0, 0, 0, 0.15) 0px 0px, rgba(0, 0, 0, 0.14) 0px 9px 20px, rgba(0, 0, 0, 0.12) 0px 37px 37px, rgba(0, 0, 0, 0.08) 0px 84px 50px, rgba(0, 0, 0, 0.02) 0px 149px 60px, rgba(0, 0, 0, 0.01) 0px 233px 65px"
           }}
@@ -171,24 +146,6 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
                   />
                 ))}
               </div>
-
-              {/* Animated feedback reactions bursting up */}
-              <AnimatePresence>
-                {reactions.map((r) => (
-                  <motion.span
-                    key={r.id}
-                    initial={{ opacity: 0, scale: 0.5, y: 15 }}
-                    animate={{ opacity: 1, scale: 1.3, y: -70 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 2.2, ease: "easeOut" }}
-                    style={{ left: `${r.x}%`, top: `${r.y}%` }}
-                    className="absolute text-xl z-20 pointer-events-none select-none filter drop-shadow-xs"
-                  >
-                    {r.emoji}
-                  </motion.span>
-                ))}
-              </AnimatePresence>
-
             </div>
 
             {/* Captions & Playback tracking bar */}
