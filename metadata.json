@@ -1,0 +1,10 @@
+{
+  "name": "Remix: Matcha",
+  "description": "Interactive, highly animated landing page and Telegram Mini App simulator for Matcha, a vibe-based professional networking platform.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
