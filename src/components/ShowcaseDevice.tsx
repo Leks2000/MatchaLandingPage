@@ -15,18 +15,16 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
       : "Sync your coding and matcha interests with top IT creators.";
 
   return (
-    <section className="relative w-full max-w-5xl mx-auto py-10 px-4 md:px-8">
-      <div className="absolute inset-0 bg-gradient-to-tr from-[#22C55E]/10 to-[#DCFCE7]/30 blur-[130px] opacity-70 pointer-events-none rounded-full" />
-
-      <div className="w-full relative py-6 flex items-center justify-center" style={{ perspective: "1000px" }}>
+    <section className="relative w-full max-w-5xl mx-auto pt-2 pb-8 px-4 md:px-8">
+      <div className="w-full relative -mt-4 sm:-mt-6 flex items-center justify-center" style={{ perspective: "1400px" }}>
         <motion.div
           style={{
             transformStyle: "preserve-3d",
-            borderColor,
           }}
-          animate={{ y: [0, -6, 0] }}
-          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-full rounded-[30px] border-4 border-[#DCFCE7] bg-white p-3 md:p-5 shadow-[0_24px_80px_rgba(0,0,0,0.2)]"
+          initial={{ rotateX: 10, rotateY: -9, y: 10 }}
+          animate={{ rotateX: [10, 8, 10], rotateY: [-9, -6, -9], y: [10, 0, 10] }}
+          transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+          className="w-full rounded-[30px] border-4 border-brand-mint-card/90 bg-[#F7FFFA] p-3 md:p-5 shadow-[0_35px_90px_rgba(8,44,22,0.34)]"
         >
           <div className="overflow-hidden rounded-2xl bg-black">
             <video
@@ -45,20 +43,19 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
         </motion.div>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
-        <div className="text-center md:text-left">
-          <p className="text-xl font-black text-white">{cta}</p>
-          <p className="mt-2 text-sm font-medium text-white/75">{ctaSub}</p>
+      <div className="mt-5 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-between">
+        <div className="text-center sm:text-left">
+          <p className="text-lg sm:text-xl font-black text-white">{cta}</p>
+          <p className="mt-1.5 text-xs sm:text-sm font-medium text-[#DAFBE8]">{ctaSub}</p>
         </div>
 
         <a
           href="https://t.me/getmatchabot"
           target="_blank"
           rel="noreferrer"
-          className="justify-self-center md:justify-self-end w-[220px] rounded-2xl bg-white p-3 shadow-xl hover:scale-[1.02] transition-transform"
+          className="inline-flex items-center gap-2 rounded-2xl bg-brand-green px-5 py-3 text-white font-black text-sm shadow-[0_12px_24px_rgba(34,197,94,0.3)] hover:scale-[1.02] transition-transform"
         >
-          <img src={REAL_QR} alt="QR code to @GETMATCHABOT" className="w-full h-auto rounded-xl" loading="lazy" />
-          <p className="pt-2 text-center text-[#5b7ee8] text-xl font-black tracking-wide">@GETMATCHABOT</p>
+          {lang === "RU" ? "Запустить бота" : "Launch bot"}
         </a>
       </div>
     </section>
