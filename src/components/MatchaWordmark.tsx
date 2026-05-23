@@ -1,10 +1,10 @@
-import React from "react";
+import logo from "../imgs/matcha-wordmark-white.png";
 
 export default function MatchaWordmark() {
   return (
     <div className="w-full flex justify-center">
       <img
-        src="https://i.ibb.co/6W6CQnV/matcha-wordmark-white.png"
+        src={logo}
         alt="Matcha logo"
         loading="eager"
         decoding="async"
