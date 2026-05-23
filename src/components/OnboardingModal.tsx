@@ -135,29 +135,14 @@ export default function OnboardingModal({ isOpen, onClose, lang }: OnboardingMod
                     </a>
                   </div>
 
-                  {/* HIGH-FIDELITY QR REPRESENTATION WITH RUNNING LASER LINE ANIMATION */}
                   <div className="relative mx-auto rounded-2xl border-2 border-[#DCFCE7] bg-white p-3 shadow-sm select-none">
-                    <div className="absolute inset-x-3 h-0.5 bg-gradient-to-r from-transparent via-[#22C55E] to-transparent animate-bounce z-10" style={{ animationDuration: '2.5s' }} />
-                    
-                    {/* Visual simulated qr block containing custom vector structures */}
-                    <div className="w-32 h-32 flex flex-col items-center justify-center relative bg-slate-50 border border-dotted border-slate-200 rounded-xl overflow-hidden p-1.5">
-                      {/* Corner markers */}
-                      <div className="absolute top-1.5 left-1.5 w-4 h-4 border-2 border-[#16A34A] border-r-0 border-b-0" />
-                      <div className="absolute top-1.5 right-1.5 w-4 h-4 border-2 border-[#16A34A] border-l-0 border-b-0" />
-                      <div className="absolute bottom-1.5 left-1.5 w-4 h-4 border-2 border-[#16A34A] border-r-0 border-t-0" />
-                      <div className="absolute bottom-1.5 right-1.5 w-4 h-4 border-2 border-[#16A34A] border-l-0 border-t-0" />
-                      
-                      {/* Generates a high-contrast nice fake SVG QR visual */}
-                      <svg className="w-20 h-20 text-slate-800" viewBox="0 0 100 100" fill="currentColor">
-                        <path d="M5 5h30v30H5V5zm6 6v18h18V11H11zm54-6h30v30h-30V5zm6 6v18h18V11H65zM5 65h30v30H5V65zm6 6v18h18V71H11zm50 0h5v5h-5v-5zm10 0h5v5h-5v-5zm10 0h5v5h-5v-5zm-30 10h5v5h-5v-5zm10 0h5v5h-5v-5zm15 0h5v5h-5v-5zm-25 10h5v5h-5v-5zm10 0h5v5h-5v-5zm10 0h5v5h-5v-5zM45 45h10v10H45V45zm5-20h5v5h-5v-5zm-15 15h5v5h-5v-5zm30 10h5v5h-5v-5zm-5 10h5v5h-5v-5z" />
-                        {/* Little central matcha cup identifier watermark */}
-                        <rect x="42" y="42" width="16" height="16" rx="4" fill="#FFFFFF" />
-                        <text x="50" y="54" fontSize="10" fontWeight="bold" textAnchor="middle" fill="#22C55E">🍵</text>
-                      </svg>
-                    </div>
-
-                    <div className="text-center font-mono text-[8px] text-slate-400 uppercase tracking-widest pt-1.5 font-bold">
-                      @GetMatchaBot
+                    <img
+                      src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Ft.me%2FGetMatchaBot"
+                      alt="QR code to @GETMATCHABOT"
+                      className="w-36 h-36 rounded-xl border border-slate-100"
+                    />
+                    <div className="text-center font-mono text-[10px] text-[#5b7ee8] uppercase tracking-wider pt-2 font-black">
+                      @GETMATCHABOT
                     </div>
                   </div>
 
