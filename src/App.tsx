@@ -52,7 +52,7 @@ export default function App() {
   const activeFaqList = FAQ_TRANSLATIONS[lang];
 
   return (
-    <div id="landing-root-container" className="min-h-screen bg-[#F0FDF4] text-brand-primary font-sans relative overflow-hidden pb-20 selection:bg-brand-green selection:text-brand-deep-green">
+    <div id="landing-root-container" className="min-h-screen bg-[#FFFFFF] text-brand-primary font-sans relative overflow-hidden pb-20 selection:bg-brand-green selection:text-brand-deep-green">
       
       {/* Background accents (static for smoother performance) */}
       <div className="absolute top-[-10%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-brand-green/10 blur-[120px] pointer-events-none" />
@@ -62,22 +62,20 @@ export default function App() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
 
       {/* Top actions */}
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
-        <div className="flex items-center gap-2 rounded-full border border-[#1e3a8a]/50 bg-[#020b2a] px-2 py-2 shadow-[0_10px_30px_rgba(2,6,23,0.45)]">
+      <header className="fixed top-4 right-4 z-50 flex items-center gap-3">
         <button 
           onClick={() => setLang(lang === "RU" ? "EN" : "RU")}
-          className="px-4 py-2 border border-[#334155] rounded-full text-sm font-mono font-bold text-white bg-transparent hover:bg-white/10 transition-colors"
+          className="px-4 py-2 bg-brand-white border border-brand-border rounded-xl text-sm font-mono font-bold text-brand-deep-green shadow-sm hover:shadow"
         >
           {lang}
         </button>
 
         <button 
           onClick={() => setIsOnboardingOpen(true)}
-          className="bg-brand-green hover:bg-[#16A34A] text-white font-extrabold text-sm px-5 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg"
+          className="bg-brand-green hover:bg-[#16A34A] text-white font-extrabold text-sm px-5 py-3 rounded-xl transition-all shadow-md hover:shadow-lg"
         >
           {t.btnLaunch}
         </button>
-        </div>
       </header>
 
       {/* Main Container Workspace */}

@@ -8,7 +8,7 @@ export default function MatchaWordmark() {
         alt="Matcha logo"
         loading="eager"
         decoding="async"
-        className="w-[430px] sm:w-[630px] md:w-[820px] h-auto object-contain"
+        className="w-[520px] sm:w-[760px] md:w-[980px] h-auto object-contain"
       />
     </div>
   );
