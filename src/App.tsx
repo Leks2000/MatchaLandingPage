@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
-  Sparkles, Heart, Send, Globe, Layout, Smartphone, Github, CheckCircle2,
-  Bookmark, GitCommit, Link
+  Heart, Globe, CheckCircle2, ChevronDown, Send
 } from "lucide-react";
 import TMAEmulator from "./components/TMAEmulator";
 import StrategyHub from "./components/StrategyHub";
@@ -70,26 +69,26 @@ export default function App() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
 
       {/* Top actions */}
-      <header className="fixed top-4 right-4 z-50 flex items-center gap-3">
+      <header className="fixed top-4 right-4 z-50 flex items-center gap-3 bg-[#D5E2DC]/90 backdrop-blur-sm px-2.5 py-2 rounded-[18px] shadow-sm">
         <button 
           onClick={() => setLang(lang === "RU" ? "EN" : "RU")}
-          className="px-4 py-2 bg-brand-white border border-brand-border rounded-xl text-sm font-mono font-bold text-brand-deep-green shadow-sm hover:shadow"
+          className="h-10 min-w-[78px] px-3.5 inline-flex items-center justify-center gap-1.5 bg-[#ECF5F0] border border-[#C6D5CD] rounded-2xl text-[24px] sm:text-sm font-black text-[#2D6650] shadow-[0_2px_8px_rgba(11,30,21,0.12)]"
         >
-          {lang}
+          <Globe className="w-4 h-4" /> {lang}
         </button>
 
         <button 
           onClick={() => setIsOnboardingOpen(true)}
-          className="bg-brand-green hover:bg-[#16A34A] text-white font-extrabold text-sm px-5 py-3 rounded-xl transition-all shadow-md hover:shadow-lg"
+          className="h-10 min-w-[190px] px-5 inline-flex items-center justify-center gap-2 bg-brand-green hover:bg-[#16A34A] text-white font-black text-[24px] sm:text-sm uppercase rounded-2xl transition-all shadow-[0_8px_16px_rgba(9,87,42,0.25)]"
         >
-          {t.btnLaunch}
+          {lang === "RU" ? "Запустить бота" : "Launch bot"} <Send className="w-4 h-4" />
         </button>
       </header>
 
       {/* Main Container Workspace */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-16 space-y-20 relative z-10 text-center">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:pt-28 space-y-20 relative z-10 text-center">
 
-        <section id="showcase-section" className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-[#061743] py-8 sm:py-10">
+        <section id="showcase-section" className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-gradient-to-b from-[#0A1F14] via-[#0D2B1B] to-[#123322] py-8 sm:py-10">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
             <MatchaWordmark />
             <ShowcaseDevice lang={lang} />
@@ -220,8 +219,8 @@ export default function App() {
         {/* SECTION 4: TRANSLATED FAQ SECTION */}
         <section id="faq-section" className="max-w-4xl mx-auto space-y-6 pt-6 text-left scroll-mt-24">
           <div className="text-center space-y-2">
-            <h3 className="text-3xl font-display font-black text-slate-900">{t.faqTitle}</h3>
-            <p className="text-xs text-slate-500 font-medium">{t.faqSub}</p>
+            <h3 className="text-3xl font-display font-black text-slate-900">{lang === "RU" ? "Часто Задаваемые Вопросы" : t.faqTitle}</h3>
+            <p className="text-xs text-slate-500 font-medium">{lang === "RU" ? "Всё, что вы хотели знать об архитектуре Matcha Bot" : t.faqSub}</p>
           </div>
 
           <div className="space-y-3 bg-brand-white border border-brand-green/10 p-6 rounded-3xl shadow-md">
@@ -234,18 +233,21 @@ export default function App() {
                     className="w-full flex justify-between items-center text-left text-xs font-mono font-bold text-slate-800 py-1 hover:text-brand-dark-green transition-colors cursor-pointer"
                   >
                     <span>{item.q}</span>
-                    <span className="text-brand-green font-bold text-sm">{isOpen ? "−" : "+"}</span>
+                    <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.25 }} className="text-brand-green font-bold text-sm"><ChevronDown className="w-4 h-4" /></motion.span>
                   </button>
                   <AnimatePresence>
                     {isOpen && (
-                      <motion.p 
+                      <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="text-xs text-slate-500 leading-relaxed pt-2.5 pl-1 select-text font-medium"
+                        transition={{ duration: 0.28, ease: "easeInOut" }}
+                        className="overflow-hidden"
                       >
-                        {item.a}
-                      </motion.p>
+                        <p className="text-xs text-slate-500 leading-relaxed pt-2.5 pl-1 select-text font-medium">
+                          {item.a}
+                        </p>
+                      </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
