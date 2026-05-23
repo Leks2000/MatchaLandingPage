@@ -33,6 +33,7 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
 
+export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
   return (
     <div 
       ref={containerRef}
