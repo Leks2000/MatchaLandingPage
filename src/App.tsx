@@ -144,9 +144,11 @@ export default function App() {
       {/* Main Container Workspace */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 md:pt-16 space-y-20 relative z-10 text-center">
 
-        <section className="max-w-5xl mx-auto space-y-8">
-          <MatchaWordmark />
-          <ShowcaseDevice lang={lang} />
+        <section className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-[#061743] py-8 sm:py-10">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
+            <MatchaWordmark />
+            <ShowcaseDevice lang={lang} />
+          </div>
         </section>
         
         {/* HERO TITLE BLOCK */}
