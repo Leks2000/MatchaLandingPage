@@ -22,6 +22,7 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
         <motion.div
           style={{
             transformStyle: "preserve-3d",
+            borderColor,
           }}
           animate={{ y: [0, -6, 0] }}
           transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}

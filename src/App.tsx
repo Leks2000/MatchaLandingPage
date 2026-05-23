@@ -15,6 +15,7 @@ export default function App() {
   const [lang, setLang] = useState<"RU" | "EN">("RU");
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   const t = LOCALES[lang];
 
@@ -50,6 +51,13 @@ export default function App() {
   };
 
   const activeFaqList = FAQ_TRANSLATIONS[lang];
+
+  React.useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > 700);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <div id="landing-root-container" className="min-h-screen bg-[#FFFFFF] text-brand-primary font-sans relative overflow-hidden pb-20 selection:bg-brand-green selection:text-brand-deep-green">
@@ -266,6 +274,17 @@ export default function App() {
       </main>
 
       <OnboardingModal isOpen={isOnboardingOpen} onClose={() => setIsOnboardingOpen(false)} lang={lang} />
+
+      {showScrollTop && (
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-6 right-5 z-40 h-11 w-11 rounded-full bg-[#020b2a] text-white shadow-[0_8px_24px_rgba(2,6,23,0.35)] border border-white/20 hover:scale-105 transition"
+          aria-label="Back to top"
+        >
+          ↑
+        </button>
+      )}
     </div>
   );
 }
