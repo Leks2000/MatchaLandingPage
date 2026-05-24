@@ -6,6 +6,17 @@ interface ShowcaseDeviceProps {
 }
 
 export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [14, 9, 14]);
+  const rotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-11, -6, -11]);
+  const translateY = useTransform(scrollYProgress, [0, 0.5, 1], [18, 0, 18]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.96, 1, 0.96]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.92, 1, 0.92]);
   const cta =
     lang === "RU"
       ? "Запустите Matcha Bot в Telegram"
@@ -18,7 +29,7 @@ export default function ShowcaseDevice({ lang }: ShowcaseDeviceProps) {
       : "Sync your coding and matcha interests with top IT creators.";
 
   return (
-    <section className="relative w-full max-w-5xl mx-auto pt-2 pb-8 px-4 md:px-8">
+    <section ref={sectionRef} className="relative w-full max-w-5xl mx-auto pt-2 pb-8 px-4 md:px-8">
       <div className="w-full relative -mt-4 sm:-mt-6 flex items-center justify-center" style={{ perspective: "1400px" }}>
         <motion.div
           style={{
